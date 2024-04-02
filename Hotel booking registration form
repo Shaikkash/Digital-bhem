@@ -1,0 +1,43 @@
+def customer_info():
+    print("Enter Customer Information:")
+    name = input("Name: ")
+    email = input("Email: ")
+    phone = input("Phone: ")
+    return {"name": name, "email": email, "phone": phone}
+
+def room_info():
+    print("\nEnter Room Information:")
+    room_type = input("Room Type: ")
+    num_nights = int(input("Number of Nights: "))
+    return {"room_type": room_type, "num_nights": num_nights}
+
+def room_rates(room_type, num_nights):
+    rates = {"single": 50, "double": 80, "suite": 120}  # Room rates per night
+    return rates.get(room_type.lower(), 0) * num_nights
+
+def payment(total_amount):
+    print("\nPayment Details:")
+    amount_paid = float(input("Enter Amount Paid: "))
+    return amount_paid, total_amount - amount_paid
+
+def display_booking_info(customer, room, total_amount, amount_paid, balance):
+    print("\nBooking Information:")
+    print("Customer Name:", customer["name"])
+    print("Email:", customer["email"])
+    print("Phone:", customer["phone"])
+    print("Room Type:", room["room_type"])
+    print("Number of Nights:", room["num_nights"])
+    print("Total Amount: $", total_amount)
+    print("Amount Paid: $", amount_paid)
+    print("Balance: $", balance)
+
+def main():
+    print("Welcome to Hotel Booking Registration Form\n")
+    customer = customer_info()
+    room = room_info()
+    total_amount = room_rates(room["room_type"], room["num_nights"])
+    amount_paid, balance = payment(total_amount)
+    display_booking_info(customer, room, total_amount, amount_paid, balance)
+
+if __name__ == "__main__":
+    main()
